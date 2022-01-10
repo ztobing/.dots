@@ -1,0 +1,88 @@
+#!/usr/bin/env zsh
+
+ITEM_DIR="$HOME/.config/sketchybar/items"
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
+
+# -----------------------
+# Bar Settings
+# -----------------------
+BAR_PADDING=7
+BAR_HEIGHT=35
+BAR_BG=0x00000000
+BAR_ICON_FONT="Hack Nerd Font:Bold:14.0"
+BAR_LABEL_FONT="Hack Nerd Font:Bold:14.0"
+
+# -----------------------
+# Item Settings
+# -----------------------
+ITEM_RADIUS=5
+ITEM_BORDER_WIDTH=2
+ITEM_PADDING=2
+
+# -----------------------
+# Color Settings
+# -----------------------
+COLOR_BG=0xffe5e5e6
+COLOR_BG_ALT=0xff33282d
+COLOR_FG=0xff3d3036
+COLOR_1=0xffd9a9a5
+COLOR_2=0xffe3d0ae
+COLOR_3=0xff9facd4
+COLOR_4=0xffd8b8d1
+COLOR_5=0xffafe1f1
+COLOR_6=0xffb0f1af
+COLOR_7=0xffceaff1
+
+# -----------------------
+# Actually Bar Settings
+# -----------------------
+sketchybar -m --bar height=$BAR_HEIGHT                                 \
+                    blur_radius=0                                      \
+                    position=top                                       \
+                    margin=$BAR_PADDING                                \
+                    y_offset=$BAR_PADDING                              \
+                    padding_left=$(($BAR_PADDING-$ITEM_PADDING))       \
+                    padding_right=$(($BAR_PADDING-$ITEM_PADDING))      \
+                    color=$BAR_BG                                      \
+                                                                       \
+              --default updates=when_shown                             \
+                        drawing=on                                     \
+                        cache_scripts=on                               \
+                                                                       \
+                        icon.font=$BAR_ICON_FONT                       \
+                        icon.color=$COLOR_FG                           \
+                        label.font=$BAR_LABEL_FONT                     \
+                        label.color=$COLOR_FG                          \
+                        label.padding_left=4                           \
+                        icon.padding_right=4                           \
+                        icon.padding_left=8                            \
+                        label.padding_right=8                          \
+                                                                       \
+                        background.color=$COLOR_BG                     \
+                        background.corner_radius=$ITEM_RADIUS          \
+                        background.border_color=$COLOR_BG_ALT          \
+                        background.border_width=$ITEM_BORDER_WIDTH     \
+                        background.padding_left=$ITEM_PADDING          \
+                        background.padding_right=$ITEM_PADDING
+
+# -----------------------
+# Items
+# -----------------------
+source "$ITEM_DIR/yabai.sh"
+source "$ITEM_DIR/rightside.sh"
+source "$ITEM_DIR/network.sh"
+source "$ITEM_DIR/appleMusic.sh"
+
+# -----------------------
+# Templates
+# -----------------------
+sketchybar -m --add template.item left              \
+              --set label.font="$BAR_LABEL_FONT"    \
+                    label.color="$COLOR_FG"         \
+                    icon.font="$BAR_ICON_FONT"      \
+                    icon.color="$COLOR_FG"          \
+                    label="TEST"                    \
+                    icon="􀣺"
+
+sketchybar -m --update
+echo "sketchybar configuration loaded.."

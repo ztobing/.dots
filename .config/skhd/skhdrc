@@ -1,0 +1,58 @@
+# -------------------
+# やばい
+# -------------------
+ctrl + alt + cmd - r : brew services restart yabai
+
+
+# -------------------
+# Window management
+# -------------------
+hyper - left : yabai -m window --swap west
+hyper - right : yabai -m window --swap east
+hyper - up : yabai -m window --swap north
+hyper - down : yabai -m window --swap south
+hyper - r : yabai -m space --rotate 90
+hyper - m : yabai -m space --mirror y-axis
+hyper - f : yabai -m window --toggle zoom-fullscreen
+hyper - z : yabai -m window --toggle float
+
+# increase window size
+#shift + alt - a : yabai -m window --resize left:-20:0
+#shift + alt - s : yabai -m window --resize bottom:0:20
+#shift + alt - w : yabai -m window --resize top:0:-20
+#shift + alt - d : yabai -m window --resize right:20:0
+
+# decrease window size
+#shift + cmd - a : yabai -m window --resize left:20:0
+#shift + cmd - s : yabai -m window --resize bottom:0:-20
+#shift + cmd - w : yabai -m window --resize top:0:20
+#shift + cmd - d : yabai -m window --resize right:-20:0
+
+
+# -------------------
+# Window Navigation
+# -------------------
+hyper - q : yabai -m window --focus prev || yabai -m window --focus last
+hyper - w : yabai -m window --focus next || yabai -m window --focus first
+
+
+# -------------------
+# Space Selector
+# -------------------
+hyper - 1 : yabai -m space --focus 1
+hyper - 2 : yabai -m space --focus 2
+hyper - 3 : yabai -m space --focus 3
+hyper - 4 : yabai -m space --focus 4
+hyper - a : yabai -m space --focus prev
+hyper - s : yabai -m space --focus next
+
+hyper - pageup : yabai -m space --focus next
+hyper - pagedown : yabai -m space --focus prev
+
+
+# -------------------
+# Display
+# -------------------
+ctrl + cmd - 1 : yabai -m window --display 1 yabai -m display --focus 1
+ctrl + cmd - 2 : yabai -m window --display 2 yabai -m display --focus 2
+ctrl + cmd - 3 : yabai -m window --display 3 yabai -m display --focus 3
