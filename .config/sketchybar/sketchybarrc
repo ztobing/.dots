@@ -18,20 +18,30 @@ BAR_LABEL_FONT="Hack Nerd Font:Bold:14.0"
 ITEM_RADIUS=5
 ITEM_BORDER_WIDTH=2
 ITEM_PADDING=2
+OUTTER_PADDING=8
+INNER_PADDING=4
+
 
 # -----------------------
 # Color Settings
 # -----------------------
 COLOR_BG=0xffe5e5e6
-COLOR_BG_ALT=0xff33282d
 COLOR_FG=0xff3d3036
+COLOR_FG_ALT=0xff33282d
 COLOR_1=0xffd9a9a5
+COLOR_1_ALT=0xff
 COLOR_2=0xffe3d0ae
+COLOR_2_ALT=0xffd1b17a
 COLOR_3=0xff9facd4
+COLOR_3_ALT=0xff
 COLOR_4=0xffd8b8d1
+COLOR_4_ALT=0xff
 COLOR_5=0xffafe1f1
+COLOR_5_ALT=0xff
 COLOR_6=0xffb0f1af
+COLOR_6_ALT=0xff
 COLOR_7=0xffceaff1
+COLOR_7_ALT=0xff
 
 # -----------------------
 # Actually Bar Settings
@@ -53,14 +63,14 @@ sketchybar -m --bar height=$BAR_HEIGHT                                 \
                         icon.color=$COLOR_FG                           \
                         label.font=$BAR_LABEL_FONT                     \
                         label.color=$COLOR_FG                          \
-                        label.padding_left=4                           \
-                        icon.padding_right=4                           \
-                        icon.padding_left=8                            \
-                        label.padding_right=8                          \
+                        label.padding_left=$INNER_PADDING              \
+                        icon.padding_right=$INNER_PADDING              \
+                        icon.padding_left=$OUTTER_PADDING              \
+                        label.padding_right=$OUTTER_PADDING            \
                                                                        \
                         background.color=$COLOR_BG                     \
                         background.corner_radius=$ITEM_RADIUS          \
-                        background.border_color=$COLOR_BG_ALT          \
+                        background.border_color=$COLOR_FG_ALT          \
                         background.border_width=$ITEM_BORDER_WIDTH     \
                         background.padding_left=$ITEM_PADDING          \
                         background.padding_right=$ITEM_PADDING
