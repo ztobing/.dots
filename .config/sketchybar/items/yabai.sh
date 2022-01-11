@@ -18,8 +18,8 @@ sketchybar --add event window_focus                                 \
                               drawing=on                            \
                               script="$PLUGIN_DIR/windowTitle.sh"   \
                               width=200                             \
-                              background.color=$COLOR_FG             \
-                              label.color=$COLOR_BG                  \
+                              background.color=$COLOR_FG            \
+                              label.color=$COLOR_BG                 \
            --subscribe system.label front_app_switched window_focus \
 
 # -----------------------
