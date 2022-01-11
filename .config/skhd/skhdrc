@@ -2,6 +2,7 @@
 # やばい
 # -------------------
 ctrl + alt + cmd - r : brew services restart yabai
+ctrl + alt + cmd - s : brew services restart sketchybar
 
 
 # -------------------
