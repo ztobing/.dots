@@ -78,10 +78,11 @@ sketchybar -m --bar height=$BAR_HEIGHT                                 \
 # -----------------------
 # Items
 # -----------------------
-source "$ITEM_DIR/yabai.sh"
+source "$ITEM_DIR/apple.sh"
+source "$ITEM_DIR/spaces.sh"
 source "$ITEM_DIR/rightside.sh"
 source "$ITEM_DIR/network.sh"
-source "$ITEM_DIR/appleMusic.sh"
+source "$ITEM_DIR/audio.sh"
 
 # -----------------------
 # Templates
