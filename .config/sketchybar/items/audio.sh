@@ -1,17 +1,24 @@
 #!/usr/bin/env sh
 
-sketchybar --add item audio.output right                                \
-           --set audio.output script="$PLUGIN_DIR/audio.sh"             \
-                background.color=$COLOR_5                               \
-                update_freq=5
+APPLE_MUSIC_EVENT="com.apple.Music.playerInfo"
+BLUETOOTH_EVENT="com.apple.bluetooth.status"
 
-
-
-sketchybar --add item music.indicator right                             \
-           --set music.indicator script="$PLUGIN_DIR/appleMusic.sh"     \
-                                 updates=on                             \
-                                 icon.font="Hack Nerd Font:Bold:20.0"   \
-                                 icon=                                 \
-                                 background.color=$COLOR_4              \
-           --add event music_updated com.apple.Music.playerInfo         \
-           --subscribe music.indicator music_updated
+sketchybar --add event music_event      $APPLE_MUSIC_EVENT                  \
+           --add event bluetooth_event  $BLUETOOTH_EVENT                    \
+           --add item                   audio right                         \
+           --set audio                  updates=on                          \
+                                        icon.color=$BLACK                   \
+                                        icon.font="$NERD_FONT:Regular:14.0" \
+                                        icon.padding_left=10                \
+                                        icon.padding_right=0                \
+                                        label.color=$BLACK                  \
+                                        label.padding_left=5                \
+                                        label.padding_right=10              \
+                                        width=dynamic                       \
+                                        align=center                        \
+                                        script="$PLUGIN_DIR/audio.sh"       \
+                                        background.color=$YELLOW            \
+                                        background.height=26                \
+                                        background.corner_radius=11         \
+                                        background.padding_right=5          \
+           --subscribe audio            music_event bluetooth_event

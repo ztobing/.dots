@@ -1,99 +1,73 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env sh
 
-ITEM_DIR="$HOME/.config/sketchybar/items"
-PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
+source "$HOME/.config/sketchybar/colors.sh" # Loads all defined colors
+source "$HOME/.config/sketchybar/icons.sh" # Loads all defined icons
 
-# -----------------------
-# Bar Settings
-# -----------------------
-BAR_PADDING=7
-BAR_HEIGHT=35
-BAR_BG=0x00000000
-BAR_ICON_FONT="Hack Nerd Font:Bold:14.0"
-BAR_LABEL_FONT="Hack Nerd Font:Bold:14.0"
+ITEM_DIR="$HOME/.config/sketchybar/items" # Directory where the items are configured
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins" # Directory where all the plugin scripts are stored
 
-# -----------------------
-# Item Settings
-# -----------------------
-ITEM_RADIUS=5
-ITEM_BORDER_WIDTH=2
-ITEM_PADDING=2
-OUTTER_PADDING=8
-INNER_PADDING=4
+FONT="SF Pro" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
+NERD_FONT="MesloLGS NF"
+SPACE_CLICK_SCRIPT="yabai -m space --focus \$SID 2>/dev/null" # The script that is run for clicking on space components
 
+PADDINGS=3 # All paddings use this value (icon, label, background)
 
-# -----------------------
-# Color Settings
-# -----------------------
-COLOR_BG=0xffe5e5e6
-COLOR_FG=0xff3d3036
-COLOR_FG_ALT=0xff33282d
-COLOR_1=0xffd9a9a5
-COLOR_1_ALT=0xff
-COLOR_2=0xffe3d0ae
-COLOR_2_ALT=0xffd1b17a
-COLOR_3=0xff9facd4
-COLOR_3_ALT=0xff
-COLOR_4=0xffd8b8d1
-COLOR_4_ALT=0xff
-COLOR_5=0xffafe1f1
-COLOR_5_ALT=0xff
-COLOR_6=0xffb0f1af
-COLOR_6_ALT=0xff
-COLOR_7=0xffceaff1
-COLOR_7_ALT=0xff
+POPUP_BORDER_WIDTH=2
+POPUP_CORNER_RADIUS=11
 
-# -----------------------
-# Actually Bar Settings
-# -----------------------
-sketchybar -m --bar height=$BAR_HEIGHT                                 \
-                    blur_radius=0                                      \
-                    position=top                                       \
-                    margin=$BAR_PADDING                                \
-                    y_offset=$BAR_PADDING                              \
-                    padding_left=$(($BAR_PADDING-$ITEM_PADDING))       \
-                    padding_right=$(($BAR_PADDING-$ITEM_PADDING))      \
-                    color=$BAR_BG                                      \
+SHADOW=on
+
+# Setting up the general bar appearance and default values
+sketchybar --bar     height=39                                         \
+                     color=$BAR_COLOR                                  \
+                     shadow=$SHADOW                                    \
+                     position=top                                      \
+                     sticky=on                                         \
+                     padding_right=$((10 - $PADDINGS))                 \
+                     padding_left=18                                   \
+                     corner_radius=9                                   \
+                     y_offset=10                                       \
+                     margin=10                                         \
+                     blur_radius=20                                    \
+                     notch_width=0                                     \
                                                                        \
-              --default updates=when_shown                             \
-                        drawing=on                                     \
-                        cache_scripts=on                               \
-                                                                       \
-                        icon.font=$BAR_ICON_FONT                       \
-                        icon.color=$COLOR_FG                           \
-                        label.font=$BAR_LABEL_FONT                     \
-                        label.color=$COLOR_FG                          \
-                        label.padding_left=$INNER_PADDING              \
-                        icon.padding_right=$INNER_PADDING              \
-                        icon.padding_left=$OUTTER_PADDING              \
-                        label.padding_right=$OUTTER_PADDING            \
-                                                                       \
-                        background.color=$COLOR_BG                     \
-                        background.corner_radius=$ITEM_RADIUS          \
-                        background.border_color=$COLOR_FG_ALT          \
-                        background.border_width=$ITEM_BORDER_WIDTH     \
-                        background.padding_left=$ITEM_PADDING          \
-                        background.padding_right=$ITEM_PADDING
+           --default updates=when_shown                                \
+                     icon.font="$FONT:Bold:14.0"                       \
+                     icon.color=$ICON_COLOR                            \
+                     icon.padding_left=$PADDINGS                       \
+                     icon.padding_right=$PADDINGS                      \
+                     label.font="$FONT:Semibold:13.0"                  \
+                     label.color=$LABEL_COLOR                          \
+                     label.padding_left=$PADDINGS                      \
+                     label.padding_right=$PADDINGS                     \
+                     background.padding_right=$PADDINGS                \
+                     background.padding_left=$PADDINGS                 \
+                     popup.background.border_width=2                   \
+                     popup.background.corner_radius=11                 \
+                     popup.background.border_color=$POPUP_BORDER_COLOR \
+                     popup.background.color=$POPUP_BACKGROUND_COLOR    \
+                     popup.background.shadow.drawing=$SHADOW
 
-# -----------------------
-# Items
-# -----------------------
+# Left
 source "$ITEM_DIR/apple.sh"
 source "$ITEM_DIR/spaces.sh"
-source "$ITEM_DIR/rightside.sh"
-source "$ITEM_DIR/network.sh"
+source "$ITEM_DIR/front_app.sh"
+
+# Center
+# source "$ITEM_DIR/spotify.sh"
+source "$ITEM_DIR/apple_music.sh"
+
+# Right
+# source "$ITEM_DIR/github.sh"
+# source "$ITEM_DIR/mail.sh"
+source "$ITEM_DIR/calendar.sh"
+source "$ITEM_DIR/battery.sh"
+source "$ITEM_DIR/gpu.sh"
+source "$ITEM_DIR/wifi.sh"
 source "$ITEM_DIR/audio.sh"
+source "$ITEM_DIR/cpu.sh"
 
-# -----------------------
-# Templates
-# -----------------------
-sketchybar -m --add template.item left              \
-              --set label.font="$BAR_LABEL_FONT"    \
-                    label.color="$COLOR_FG"         \
-                    icon.font="$BAR_ICON_FONT"      \
-                    icon.color="$COLOR_FG"          \
-                    label="TEST"                    \
-                    icon="􀣺"
+############## FINALIZING THE SETUP ##############
+sketchybar --update
 
-sketchybar -m --update
-echo "sketchybar configuration loaded.."
+echo "sketchybar configuation loaded.."

@@ -1,23 +1,37 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env sh
 
-# -----------------------
-# Apple
-# -----------------------
-sketchybar --add item apple.logo left                   \
-           --set apple.logo icon=􀣺                      \
-                            icon.font="SF:Bold:18"      \
-                            icon.padding_right=0        \
-                            icon.padding_left=10
+POPUP_OFF="sketchybar --set apple.logo popup.drawing=off"
+POPUP_CLICK_SCRIPT="sketchybar --set \$NAME popup.drawing=toggle"
 
-# -----------------------
-# Foreground App Name
-# -----------------------
-sketchybar --add event window_focus                                 \
-           --add item system.label left                             \
-           --set system.label position=left                         \
-                              drawing=on                            \
-                              script="$PLUGIN_DIR/windowTitle.sh"   \
-                              width=200                             \
-                              background.color=$COLOR_FG            \
-                              label.color=$COLOR_BG                 \
-           --subscribe system.label front_app_switched window_focus \
+sketchybar --add item           apple.logo left                             \
+                                                                            \
+           --set apple.logo     icon=$APPLE                                 \
+                                icon.font="$FONT:Black:16.0"                \
+                                icon.color=$MAGENTA                         \
+                                background.padding_left=-8                  \
+                                background.padding_right=25                 \
+                                label.drawing=off                           \
+                                click_script="$POPUP_CLICK_SCRIPT"          \
+                                                                            \
+           --add item           apple.prefs popup.apple.logo                \
+           --set apple.prefs    icon=$PREFERENCES                           \
+                                label="Preferences"                         \
+                                click_script="open -a 'System Preferences';
+                                              $POPUP_OFF"                   \
+                                                                            \
+           --add item           apple.activity popup.apple.logo             \
+           --set apple.activity icon=$ACTIVITY                              \
+                                label="Activity"                            \
+                                click_script="open -a 'Activity Monitor';
+                                              $POPUP_OFF"\
+                                                                            \
+           --add item           apple.lock popup.apple.logo                 \
+           --set apple.lock     icon=$LOCK                                  \
+                                label="Lock Screen"                         \
+                                click_script="pmset displaysleepnow;
+                                              $POPUP_OFF"                   \
+           --add item           apple.bcamp popup.apple.logo                \
+           --set apple.bcamp    icon=􁑮                                 \
+                                label="Enter Boot Camp"                     \
+                                click_script="shortcuts run \"Restart to Bootcamp\";
+                                              $POPUP_OFF"

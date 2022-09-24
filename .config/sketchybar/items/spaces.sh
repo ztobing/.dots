@@ -1,48 +1,31 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env sh
 
- -----------------------
-# Spaces
-# -----------------------
-sketchybar -m --add space first left                             \
-              --set first associated_display=1                   \
-                         associated_space=1                      \
-                         icon=一                                 \
-                         icon.highlight_color=$COLOR_FG          \
-                         icon.color=$COLOR_BG                    \
-                         background.color=$COLOR_1               \
-                         icon.padding_right=0                    \
-                         icon.padding_left=10                    \
-                         click_script="yabai -m space --focus 1" \
-                                                                 \
-              --add space sec left                               \
-              --set sec  associated_display=1                    \
-                         associated_space=2                      \
-                         icon=二                                 \
-                         icon.highlight_color=$COLOR_FG          \
-                         icon.color=$COLOR_BG                    \
-                         background.color=$COLOR_2               \
-                         icon.padding_right=0                    \
-                         icon.padding_left=10                    \
-                         click_script="yabai -m space --focus 2" \
-                                                                 \
-              --add space third left                             \
-              --set third  associated_display=1                  \
-                         associated_space=3                      \
-                         icon=三                                 \
-                         icon.highlight_color=$COLOR_FG          \
-                         icon.color=$COLOR_BG                    \
-                         background.color=$COLOR_3               \
-                         icon.padding_right=0                    \
-                         icon.padding_left=10                    \
-                         click_script="yabai -m space --focus 3" \
-                                                                 \
-              --add space fourth left                            \
-              --set fourth  associated_display=1                 \
-                         associated_space=4                      \
-                         icon=四                                 \
-                         icon.color=$COLOR_BG                    \
-                         background.color=$COLOR_4               \
-                         icon.padding_right=0                    \
-                         icon.padding_left=10                    \
-                         icon.highlight_color=$COLOR_FG          \
-                         click_script="yabai -m space --focus 4"
+SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
+
+for i in "${!SPACE_ICONS[@]}"
+do
+  sid=$(($i+1))
+  sketchybar --add space      space.$sid left                    \
+             --set space.$sid associated_space=$sid              \
+                              icon=${SPACE_ICONS[i]}             \
+                              icon.padding_left=22               \
+                              icon.padding_right=22              \
+                              icon.highlight_color=$RED          \
+                              background.padding_left=-8         \
+                              background.padding_right=-8        \
+                              background.height=26               \
+                              background.corner_radius=9         \
+                              background.color=0xff3C3E4F        \
+                              background.drawing=on              \
+                              label.drawing=off                  \
+                              click_script="$SPACE_CLICK_SCRIPT"
+done
+
+sketchybar   --add item       separator left                          \
+             --set separator  icon=                                  \
+                              icon.font="Hack Nerd Font:Regular:16.0" \
+                              background.padding_left=26              \
+                              background.padding_right=15             \
+                              label.drawing=off                       \
+                              associated_display=active               \
+                              icon.color=$WHITE
